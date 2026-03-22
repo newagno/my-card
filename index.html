@@ -6,11 +6,26 @@
     <title>Digital Business Card</title>
     <link rel="icon" type="image/png" href="logo.png">
 
+    <!-- Open Graph / месенджери -->
+    <meta property="og:type"        content="profile" />
+    <meta property="og:title"       content="Serhii Polovnikov — Novosealand" />
+    <meta property="og:description" content="📞 +380 50 333 91 44 · office@novosealand.com · novosealand.com" />
+    <meta property="og:image"       content="https://novosealand.com/og-preview.jpg" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url"         content="https://novosealand.com" />
+    <meta property="og:locale"      content="uk_UA" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Serhii Polovnikov — Novosealand" />
+    <meta name="twitter:description" content="📞 +380 50 333 91 44 · office@novosealand.com · novosealand.com" />
+    <meta name="twitter:image"       content="https://novosealand.com/og-preview.jpg" />
+
     <style>
         :root {
             --sea-blue: #38bdf8;
             --text: #f8fafc;
-            /* Напівпрозорий колір для ефекту скла */
             --card-bg: rgba(255, 255, 255, 0.07);
         }
 
@@ -22,29 +37,65 @@
             color: var(--text); transition: background 1.5s ease;
         }
 
-        /* Стилі фонів */
-        .morning { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #1e293b; }
-        .day { background: radial-gradient(circle at top, #38bdf8, #1e40af); }
-        .evening { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .night { background: radial-gradient(circle at top, #1e293b, #020617); }
+        /* ── MORNING: тепло-жовте, кремове (5–11) ── */
+        .morning {
+            background: linear-gradient(160deg, #fffbeb 0%, #fef3c7 40%, #fde68a 100%);
+            color: #1c1917;
+        }
+        .morning .card {
+            color: #1c1917;
+            background: rgba(255, 255, 255, 0.55);
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+        .morning .quick-links {
+            border-top-color: rgba(0,0,0,0.08);
+            border-bottom-color: rgba(0,0,0,0.08);
+        }
+        .morning .quick-btn:not(:last-child) { border-right-color: rgba(0,0,0,0.08); }
+        .morning .contact-item { background: rgba(0,0,0,0.03); }
+        .morning .contact-item:hover { background: rgba(0,0,0,0.07); }
+        .morning .label { opacity: 0.5; }
 
+        /* ── DAY: чисте небо (11–18) ── */
+        .day { background: radial-gradient(ellipse at 50% 0%, #7dd3fc 0%, #0ea5e9 40%, #1e40af 100%); }
+
+        /* ── EVENING: тепле, бурштинове (18–22) ── */
+        .evening {
+            background: linear-gradient(160deg, #431407 0%, #9a3412 30%, #ea580c 70%, #fb923c 100%);
+        }
+        .evening .card {
+            background: rgba(255, 200, 150, 0.1);
+            border-color: rgba(255, 180, 100, 0.2);
+        }
+
+        /* ── NIGHT: дуже темна (22–5) ── */
+        .night { background: radial-gradient(ellipse at 50% 0%, #1e293b 0%, #0f172a 50%, #020617 100%); }
+        .night .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ── INTRO ── */
         #intro {
             position: fixed; inset: 0; background: #000;
             display: flex; align-items: center; justify-content: center;
             z-index: 999; animation: introFade 0.8s ease-in forwards 3s;
         }
-        #intro img { max-width: 80%; max-height: 70vh; object-fit: contain; animation: introZoom 3.2s ease-out forwards; }
+        #intro img {
+            max-width: 80%; max-height: 70vh; object-fit: contain;
+            animation: introZoom 3.2s ease-out forwards;
+        }
 
         @keyframes introZoom { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes introFade { to { opacity: 0; visibility: hidden; } }
 
+        /* ── CARD ── */
         .card {
-            width: 360px; 
-            /* СКЛОМОРФІЗМ КАРТКИ */
+            width: 360px; position: relative;
             background: var(--card-bg);
-            backdrop-filter: blur(20px); 
+            backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 24px; padding: 24px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
             opacity: 0; transform: translateY(20px);
@@ -52,9 +103,7 @@
         }
         .card.visible { opacity: 1; transform: translateY(0); }
 
-        .morning .card { color: #1e293b; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4); }
-        .morning .quick-links { border-top-color: rgba(0,0,0,0.1); border-bottom-color: rgba(0,0,0,0.1); }
-
+        /* ── AVATAR ── */
         .avatar {
             width: 88px; height: 88px; border-radius: 50%;
             margin: 0 auto 20px; background: white;
@@ -66,7 +115,7 @@
 
         h1 { text-align: center; margin: 0 0 25px 0; font-size: 24px; }
 
-        /* Швидкі кнопки зі скломорфізмом */
+        /* ── QUICK LINKS ── */
         .quick-links {
             display: grid; grid-template-columns: 1fr 1fr 1fr;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -78,7 +127,6 @@
             padding: 15px 5px; text-decoration: none; color: inherit;
             font-size: 10px; font-weight: bold; text-transform: uppercase;
             transition: background 0.3s;
-            /* СКЛОМОРФІЗМ КНОПОК */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -86,31 +134,36 @@
         .quick-btn:hover { background: rgba(56, 189, 248, 0.15); }
         .quick-btn .icon { margin-bottom: 5px; width: 20px; height: 20px; }
 
-        /* Список контактів */
+        /* ── CONTACT ITEMS ── */
         .contact-item {
             display: flex; align-items: flex-start; gap: 15px;
             margin-bottom: 20px; text-decoration: none; color: inherit;
             padding: 10px; border-radius: 12px;
             transition: background 0.3s;
-            /* ЛЕГКИЙ ЕФЕКТ СКЛА */
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(5px);
         }
-        .contact-item:hover { background: rgba(255, 255, 255, 0.08); }
+        .contact-item:hover { background: rgba(255, 255, 255, 0.1); }
 
         .info-block { display: flex; flex-direction: column; }
         .value { font-size: 14px; font-weight: 500; word-break: break-all; }
-        .label { font-size: 12px; opacity: 0.6; margin-top: 2px; }
+        .label { font-size: 12px; opacity: 0.55; margin-top: 2px; }
 
         .icon { width: 22px; height: 22px; color: var(--sea-blue); flex-shrink: 0; }
         .icon svg { width: 100%; height: 100%; fill: currentColor; }
 
+        /* ── SAVE BUTTON ── */
         .btn-save {
             display: flex; align-items: center; justify-content: center; gap: 10px;
             margin-top: 10px; padding: 14px; border-radius: 14px;
             background: var(--sea-blue) !important; color: #020617 !important;
             text-decoration: none; font-weight: bold;
             box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(56, 189, 248, 0.4);
         }
         .btn-save .icon { color: #020617; }
     </style>
@@ -123,7 +176,7 @@
         <a href="https://novosealand.com" target="_blank" style="text-decoration: none;">
             <div class="avatar"><img src="logo.png" alt="Logo" style="width: 85%; height: auto" /></div>
         </a>
-        
+
         <h1>Serhii Polovnikov</h1>
 
         <div class="quick-links">
@@ -178,15 +231,15 @@
             const hour = new Date().getHours();
             const body = document.body;
             body.classList.remove('morning', 'day', 'evening', 'night');
-            if (hour >= 5 && hour < 11) body.classList.add('morning');
+            if      (hour >= 5  && hour < 11) body.classList.add('morning');
             else if (hour >= 11 && hour < 18) body.classList.add('day');
             else if (hour >= 18 && hour < 22) body.classList.add('evening');
-            else body.classList.add('night');
+            else                               body.classList.add('night');
         }
         updateTheme();
 
         const intro = document.getElementById('intro');
-        const card = document.getElementById('mainCard');
+        const card  = document.getElementById('mainCard');
 
         if (sessionStorage.getItem('introPlayed')) {
             intro.style.display = 'none';
@@ -198,13 +251,22 @@
 
         document.getElementById('save-contact').addEventListener('click', function (e) {
             e.preventDefault();
-            const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:Serhii Polovnikov\nORG:Novosealand\nTEL;TYPE=CELL,VOICE:+380503339144\nEMAIL;TYPE=WORK,INTERNET:office@novosealand.com\nURL:https://novosealand.com\nEND:VCARD";
+            const vcard = [
+                "BEGIN:VCARD",
+                "VERSION:3.0",
+                "FN:Serhii Polovnikov",
+                "ORG:Novosealand",
+                "TEL;TYPE=CELL,VOICE:+380503339144",
+                "EMAIL;TYPE=WORK,INTERNET:office@novosealand.com",
+                "URL:https://novosealand.com",
+                "END:VCARD"
+            ].join("\r\n");
             const blob = new Blob([vcard], { type: 'text/vcard' });
-            const url = window.URL.createObjectURL(blob);
-            const newLink = document.createElement('a');
-            newLink.download = "Serhii_Polovnikov.vcf";
-            newLink.href = url;
-            newLink.click();
+            const url  = window.URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.download = "Serhii_Polovnikov.vcf";
+            a.href     = url;
+            a.click();
             window.URL.revokeObjectURL(url);
         });
     </script>
